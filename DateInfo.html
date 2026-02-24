@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DateInfo</title>
+<style>
+	#cntr{width:50vw; margin:auto; margin-top:10vh;}
+	#cntr1{width:50vw; margin:auto; margin-top:10vh;}
+	#slct{text-align:center; font-size:3rem; color:#aaaaaa; font-family:helvatica; font-weight:bold; width:100%; Background-image:linear-Gradient(#0000ff,#0000aa);}
+	input{width:100%; font-size:1.5rem; margin-top:1vh;}
+	#btn{margin:2vh 0 0 25%; font-size:1.5rem; width:50%;}
+	#rslt, #rslt1{Background-color:yellow; width:100%; margin-top:2vh; font-size:1.5rem;}
+</style>
+</head>
+
+<body>
+<!-- Container -->
+<select id="slct">
+	<option value="DatesDifference">Dates Difference</option>
+	<option value=AgeCalculaor>Age Calcuator</option>
+</select>
+<div id="cntr">
+
+	<input type="date" id="dt" placeholder="0000,00,00"><br>
+	<input type="date" id="dt2" placeholder="0000,00,00"><br>
+	<button id="btn" onclick='btn1()'>Click</button>
+	<div id="rslt">Result</div>
+</div>
+<div id="cntr1">
+
+	<input type="date" id="dtage" placeholder="0000,00,00"><br>
+	<button id="btn" onclick='btn2()'>Click</button>
+	<div id="rslt1">Age</div>
+</div>
+
+
+<div id="ftr"> 
+	<p></p>
+</div>
+
+
+
+<!-- Javascript Starts Here -->
+<script>
+	let btn = document.getElementById("btn");
+	let rslt = document.getElementById("rslt");
+	let rslt1 = document.getElementById("rslt1");
+	let slct = document.getElementById("slct");
+	let cntr = document.getElementById("cntr");
+	let cntr1 = document.getElementById("cntr1");
+
+//hiding 2nd div for age calculation
+
+cntr1.style.display="none";
+
+// function for Dates Difference
+
+function btn1(){
+// veriables
+	 let dt = document.getElementById("dt");
+	 let dt2 = document.getElementById("dt2");
+// Getting Date input 1
+	let dateObj1 = new Date(dt.value);
+	let dtv1 = dateObj1.valueOf();
+// Getting Date input 2
+	let dateObj2 = new Date(dt2.value);
+	let dtv2 = dateObj2.valueOf();
+// Getting Difference Between 2 Dates.
+
+	let diff1 = dtv2 - dtv1;
+	let days = diff1/1000/24/60/60+1;
+	let age = days /12 /30;
+	let fixAge = age.toFixed(0);
+
+	rslt.innerHTML = `Difference Between Two Dates is <b><p style=color:red>${days}<p></b> Days.`;
+}; // function bt1.onclick is closed here
+
+
+function btn2(){
+// veriables
+	 let dtage = document.getElementById("dtage");
+// Getting Date input 1
+	let dateObj2 = new Date(dtage.value);
+	let dtv2 = dateObj2.valueOf();
+// Getting today Date
+	let tday = new Date();
+	let tdayv = tday.valueOf();
+// Getting Difference Between 2 Dates.
+	let diff2 = tdayv - dtv2;
+	let da = diff2/1000/24/60/60+1;
+	let age2 = da /12 /30;
+	let fixAge2 = age2.toFixed(0);
+	console.log(fixAge2);
+
+// Getting Lucky Number from Date
+/*
+	let lucyDate = dtage.value;
+	let luckyDateArr = [Number(lucyDate[0]),Number(lucyDate[1]),Number(lucyDate[2]),Number(lucyDate[3]),Number(lucyDate[5]),Number(lucyDate[6]),Number(lucyDate[8]),Number(lucyDate[9])];
+	
+	console.log();
+*/
+
+	rslt1.innerHTML = `The Age is: <b style=color:red> ${fixAge2} </b> Years.`;
+}; // function Age is closed here
+
+// Applying if condition 
+slct.onchange = function (){
+if (slct.value == "DatesDifference"){
+	location.reload();
+	cntr1.style.display="none";
+} else {
+	cntr.style.display = "none";
+	cntr1.style.display = "block";
+};
+};
+</script>
+
+</body>
+</html>
